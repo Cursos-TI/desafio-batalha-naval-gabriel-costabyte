@@ -10,28 +10,28 @@ int main() {
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
-    int Tabuleiro[11][10] = {
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0}
-    };
+    int Tabuleiro[10][10] = {0};
 
     // Navio horizontal
-    Tabuleiro[2][3] = 3;
-    Tabuleiro[2][4] = 3;
-    Tabuleiro[2][5] = 3;
+    for (int coluna = 3; coluna <= 5; coluna++) {
+        Tabuleiro[2][coluna] = 3;
+    }
 
     // Navio vertical
-    Tabuleiro[5][7] = 3;
-    Tabuleiro[6][7] = 3;
-    Tabuleiro[7][7] = 3;
+    for (int linha = 5; linha <= 7; linha++) {
+        Tabuleiro[linha][7] = 3;
+    }
+     // Navio Diagonal1
+    for (int coluna = 0; coluna < 3; coluna++) {
+        Tabuleiro[3 + coluna][1 + coluna] = 3;
+    }
+
+     // Navio Diagonal2
+    for (int coluna = 0; coluna < 3; coluna++) {
+        Tabuleiro[7 + coluna][5 - coluna] = 3;
+    }
+
+
 
     // Letras do topo
     printf("   ");
@@ -42,7 +42,7 @@ int main() {
     printf("\n");
 
     // Exibição do tabuleiro
-    for (int linha = 1; linha < 11; linha++) {
+    for (int linha = 0; linha < 10; linha++) {
 
         printf("%2d ", linha);
 
