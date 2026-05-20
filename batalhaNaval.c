@@ -11,15 +11,18 @@ int main() {
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
     int Tabuleiro[10][10] = {0};
+    int cruz[5][5] = {0};
+    int cone[5][5] = {0};
+    int octaedro[5][5] = {0};
 
     // Navio horizontal
     for (int coluna = 3; coluna <= 5; coluna++) {
-        Tabuleiro[2][coluna] = 3;
+        Tabuleiro[3][coluna] = 3;
     }
 
     // Navio vertical
     for (int linha = 5; linha <= 7; linha++) {
-        Tabuleiro[linha][7] = 3;
+        Tabuleiro[linha][8] = 3;
     }
      // Navio Diagonal1
     for (int coluna = 0; coluna < 3; coluna++) {
@@ -41,6 +44,104 @@ int main() {
 
     printf("\n");
 
+
+    // Habilidades
+
+    // Cone
+
+    for (int l = 0; l < 5; l++) {
+        for (int c = 0; c < 5; c++) {
+
+            if (c >= 2 - l && c <= 2 + l && l <= 2) {
+                cone[l][c] = 1;
+            }
+        }
+    }
+
+    // Cruz
+
+     for (int l = 0; l < 5; l++) {
+        for (int c = 0; c < 5; c++) {
+
+            if (l == 2 || c == 2) {
+                cruz[l][c] = 1;
+            }
+        }
+    }
+
+    // Octaedro
+
+     for (int l = 0; l < 5; l++) {
+        for (int c = 0; c < 5; c++) {
+
+            int dl = l - 2;
+            int dc = c - 2;
+
+            if (dl < 0) dl = -dl;
+            if (dc < 0) dc = -dc;
+
+            if (dl + dc <= 2) {
+                octaedro[l][c] = 1;
+            }
+        }
+    }
+
+    // Pontos de origem
+
+    int origemConeL = 0, origemConeC = 0;
+    int origemCruzL = 2, origemCruzC = 5;
+    int origemOctL = 5, origemOctC = 0;
+
+    // Sobreposição
+
+     // Cone
+    for (int l = 0; l < 5; l++) {
+        for (int c = 0; c < 5; c++) {
+
+            int tl = origemConeL + l;
+            int tc = origemConeC + c;
+
+            if (tl < 10 && tc < 10 &&
+                cone[l][c] == 1 &&
+                Tabuleiro[tl][tc] == 0) {
+
+                Tabuleiro[tl][tc] = 1;
+            }
+        }
+    }
+
+    // Cruz
+    for (int l = 0; l < 5; l++) {
+        for (int c = 0; c < 5; c++) {
+
+            int tl = origemCruzL + l;
+            int tc = origemCruzC + c;
+
+            if (tl < 10 && tc < 10 &&
+                cruz[l][c] == 1 &&
+                Tabuleiro[tl][tc] == 0) {
+
+                Tabuleiro[tl][tc] = 1;
+            }
+        }
+    }
+
+    // Octaedro
+    for (int l = 0; l < 5; l++) {
+        for (int c = 0; c < 5; c++) {
+
+            int tl = origemOctL + l;
+            int tc = origemOctC + c;
+
+            if (tl < 10 && tc < 10 &&
+                octaedro[l][c] == 1 &&
+                Tabuleiro[tl][tc] == 0) {
+
+                Tabuleiro[tl][tc] = 1;
+            }
+        }
+    }
+
     // Exibição do tabuleiro
     for (int linha = 0; linha < 10; linha++) {
 
@@ -52,6 +153,8 @@ int main() {
 
         printf("\n");
     }
+
+
 
     
 
